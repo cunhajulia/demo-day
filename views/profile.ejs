@@ -1,0 +1,72 @@
+<!-- note: displaying one feature of my app here (i.e. my journal tab) to minimally display how it would work; in the next round of drafts, this will actually be home to a left nav sidebar, and the built in universal plan (see Figma wireframe). -->
+
+<!doctype html>
+<html>
+
+<head>
+  <title>Julia's Demo Day Draft 1</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="font-awesome.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="profile.css">
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="page-header text-center">
+      <h1>my journal</h1>
+      <a href="/logout" class="btn btn-default btn-sm">Exit</a>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="#">My SAECK Number</a></li>
+        <li><a href="#">My Emergency Plan</a></li>
+        <li><a href="#">My Journal</a></li>
+        <li><a href="#">My Wellness</a></li>
+      </ul>
+    </nav>
+
+      <div class="col-sm-6">
+        <h3>journal entries</h3>
+        <ul class="messages">
+          <% for(var i=0; i<messages.length; i++) {%>
+            <li class="message">
+              <span>
+                <%= messages[i].name %>
+              </span>
+              <span>
+                <%= messages[i].msg %>
+              </span>
+              <span>
+                <%= messages[i].favorite %>
+              </span>
+              <span><i class="fa fa-star aria-hidden="true"></i></span>
+              <!-- <span>
+                <%= messages[i].thumbDown %>
+              </span>
+              <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span> -->
+              <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+            </li>
+            <% } %>
+        </ul>
+
+        <h2>Add a new journal entry</h2>
+        <% if (user.local.email) { %>
+          <form action="/messages" method="POST">
+            <input type="text" value="<%= user.local.email %>" name="name">
+            <input type="text" placeholder="message" name="msg">
+            <button type="submit">Submit</button>
+          </form>
+      </div>
+      <% } %>
+
+    </div>
+
+    <script src="main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+<h2>My SAECK Number</h2>
+<p>Please input your SAECK Number below. Please note that once input, it cannot be changed.</p>
+        <% if (user.local.email) { %>
+          <form action="/messages" method="POST">
+            <input type="text" value="<%= user.local.email %>" name="name">
+            <input type="text" placeholder="SAECK Kit Number here" name="number">
+            <button type="submit">Submit</button>
+          </form>
+      </div>
+      <% } %>
