@@ -1,11 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap");
-
 body {
   margin: 50px;
+  background-color: rgb(125	184	212);
+  font-family: 'Poppins';
+  text-align: center;
+  color: white;
 }
-
-.jumbotron{
-  margin-top: 50px;
+h1{
+  font-family: 'Poppins';
 }
 .water {
   margin: auto;
@@ -40,6 +41,10 @@ body {
   border-radius: 40%;
   animation: anim 12s linear infinite;
   animation-delay: 0.5s;
+}
+.btn.btn-warning.btn-lg{
+  background-color: pink;
+  border: 1px pink;
 }
 
 @keyframes anim {

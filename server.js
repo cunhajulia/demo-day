@@ -40,7 +40,7 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
 app.use(session({
-    secret: 'rcbootcamp2021b', // session secret
+    secret: 'rcbootcamp2023a', // session secret
     resave: true,
     saveUninitialized: true
 }));
@@ -53,7 +53,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 app.listen(port);
 console.log('My demo day project is showing on ' + port);
 
-app.put('/messages/thumbDown', (req, res) => { //will need updating 
+app.put('/messages/thumbDown', (req, res) => { //*note to self: modify/delete below draft round 
   db.collection('messages')
   .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
     $set: {

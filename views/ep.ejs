@@ -1,1 +1,28 @@
-<!-- this page will contain built-in template for a survivor's emergency plan. -->
+<!-- this page will contain built-in template for a survivor's emergency plan, which I've begun with text areas. -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Julia's Demo Day Draft 1: my emergency plan page</title>
+</head>
+
+<body>
+  <h1>My Emergency Plan</h1>
+  <p>Please follow the template instructions to input your emergency plan:</p>
+  
+  <form action="/save" method="POST">
+    <h2>Emergency Plan Contact Number</h2>
+    <textarea name="emergency-plan-contact-number"></textarea>
+
+    <h2>Safe Place</h2>
+    <textarea name="safe-place"></textarea>
+
+    <button type="submit">Save</button>
+  </form>
+  <script src="main.js"></script>
+</body>
+
+</html>

@@ -1,72 +1,58 @@
-<!-- note: displaying one feature of my app here (i.e. my journal tab) to minimally display how it would work; in the next round of drafts, this will actually be home to a left nav sidebar, and the built in universal plan (see Figma wireframe). -->
+<!-- this is my homepage: left nav sidebar, and the built in universal action plan (per Figma wireframe) -->
 
 <!doctype html>
 <html>
 
 <head>
-  <title>Julia's Demo Day Draft 1</title>
+  <title>Julia's Demo Day Draft 1: homepage</title>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
   <link rel="stylesheet" href="font-awesome.min.css">
-  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="profile.css">
 </head>
 
 <body>
-  <div class="container">
+  <div id="sidebar">
+    <h3>welcome</h>
+    <ul>
+      <li><a href="/saeck">My SAECK Number</a></li>
+      <li><a href="/ep">My Emergency Plan</a></li>
+      <li><a href="/journal">My Journal</a></li>
+      <li><a href="/wellness">My Wellness</a></li>
+    </ul>
+  </div>
 
-    <div class="page-header text-center">
-      <h1>my journal</h1>
-      <a href="/logout" class="btn btn-default btn-sm">Exit</a>
-    </div>
-
-    <nav>
-      <ul>
-        <li><a href="#">My SAECK Number</a></li>
-        <li><a href="#">My Emergency Plan</a></li>
-        <li><a href="#">My Journal</a></li>
-        <li><a href="#">My Wellness</a></li>
-      </ul>
-    </nav>
-
-      <div class="col-sm-6">
-        <h3>journal entries</h3>
-        <ul class="messages">
-          <% for(var i=0; i<messages.length; i++) {%>
-            <li class="message">
-              <span>
-                <%= messages[i].name %>
-              </span>
-              <span>
-                <%= messages[i].msg %>
-              </span>
-              <span>
-                <%= messages[i].favorite %>
-              </span>
-              <span><i class="fa fa-star aria-hidden="true"></i></span>
-              <!-- <span>
-                <%= messages[i].thumbDown %>
-              </span>
-              <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span> -->
-              <span><i class="fa fa-trash" aria-hidden="true"></i></span>
-            </li>
-            <% } %>
-        </ul>
-
-        <h2>Add a new journal entry</h2>
-        <% if (user.local.email) { %>
-          <form action="/messages" method="POST">
-            <input type="text" value="<%= user.local.email %>" name="name">
-            <input type="text" placeholder="message" name="msg">
-            <button type="submit">Submit</button>
-          </form>
-      </div>
-      <% } %>
-
-    </div>
+  <h1>Universal Action Plan</h1>
+<ul>
+    <li style="--accent-color:#41516C">
+        <div class="date">2002</div>
+        <div class="title">Title 1</div>
+        <div class="descr">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas itaque hic quibusdam fugiat est numquam harum, accusamus suscipit consequatur laboriosam!</div>
+    </li>
+    <li style="--accent-color:#FBCA3E">
+        <div class="date">2007</div>
+        <div class="title">Title 2</div>
+        <div class="descr">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos adipisci nobis nostrum vero nihil veniam.</div>
+    </li>
+    <li style="--accent-color:#E24A68">
+        <div class="date">2012</div>
+        <div class="title">Title 3</div>
+        <div class="descr">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga minima consequuntur soluta placeat iure totam commodi repellendus ea delectus, libero fugit quod reprehenderit, sequi quo, et dolorum saepe nulla hic.</div>
+    </li>
+    <li style="--accent-color:#1B5F8C">
+        <div class="date">2017</div>
+        <div class="title">Title 4</div>
+        <div class="descr">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit, cumque.</div>
+    </li>
+    <li style="--accent-color:#4CADAD">
+        <div class="date">2022</div>
+        <div class="title">Title 5</div>
+        <div class="descr">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit, non.</div>
+    </li>
+</ul>
+<div class="credits"><a target="_blank" href="https://www.freepik.com/free-vector/infographic-template-with-yearly-info_1252895.htm"></a></div>
 
     <script src="main.js"></script>
-
 </body>
 
 </html>

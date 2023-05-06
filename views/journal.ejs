@@ -1,1 +1,57 @@
-<!-- this page will contain the journal template -->
+<!-- will be adding a template in here for next draft (CRUD should stay relatively unchanged, but want some extra CSS components) -->
+
+<!doctype html>
+<html>
+
+<head>
+  <title>Julia's Demo Day Draft 1: my journal</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="font-awesome.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="journal.css">
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="journal">
+      <h1>my journal</h1>
+      <a href="/logout" class="btn btn-default btn-sm">Exit</a>
+    </div>
+
+    <div class="col-sm-6">
+      <h3>journal entries</h3>
+      <ul class="entries">
+        <% for(var i=0; i<entries.length; i++) {%>
+          <li class="myEntry">
+            <span>
+              <%= entries[i].entry %>
+            </span>
+            <span>
+              <%= entries[i].favorite %>
+            </span>
+            <span><i data-entryid="<%=entries[i]._id%>" class="fa fa-star aria-hidden=" true"></i></span>
+            <span><i data-entryid="<%=entries[i]._id%>" class="fa fa-trash" aria-hidden="true"></i></span>
+          </li>
+          <% } %>
+      </ul>
+
+      <h2>Add a new journal entry</h2>
+      <% if (user.local.email) { %>
+        <form action="/journal" method="POST">
+          <input type="text" placeholder="new journal entry" name="entry">
+          <button type="submit">Submit</button>
+        </form>
+    </div>
+    <% } %>
+
+  </div>
+
+  <script src="main.js"></script>
+
+</body>
+
+</html>

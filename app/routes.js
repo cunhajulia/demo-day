@@ -1,15 +1,14 @@
-//note: starter api does not contain completed reference pathways to each page; I have added the gets for now, and the overall, complete CRUD functionality for this app can be seen in my Figma wireframe + layout. 
+//*please note: starter api (complete get, put, post, delete) is '/journal'
 
 module.exports = function (app, passport, db) {
+const ObjectId = require('mongodb').ObjectID
 
-  // normal routes ===============================================================
-
-  // show the home page (will also have our login links)
+  // show the landing page (including buttons that direct to the login + signup)
   app.get('/', function (req, res) {
     res.render('index.ejs');
   });
 
-  // MAIN PROFILE SECTION =========================
+  // GET'S *please note: I added gets for each page but have not modified them yet (as of this first draft)=========================
   app.get('/ep', isLoggedIn, function (req, res) { //get for emergency plan page 
     db.collection('messages').find().toArray((err, result) => {
       if (err) return console.log(err)
@@ -21,11 +20,11 @@ module.exports = function (app, passport, db) {
   });
 
   app.get('/journal', isLoggedIn, function (req, res) { //get for journal page 
-    db.collection('messages').find().toArray((err, result) => {
+    db.collection('entries').find({userID: req.user._id}).toArray((err, result) => {
       if (err) return console.log(err)
       res.render('journal.ejs', {
         user: req.user,
-        messages: result
+        entries: result
       })
     })
   });
@@ -68,35 +67,38 @@ module.exports = function (app, passport, db) {
     res.redirect('/');
   });
 
-  // message board routes ===============================================================
+  // POST'S ===============================================================
 
-  app.post('/messages', (req, res) => { //post for profile page ('my journal' section)
-    db.collection('messages').save({ name: req.body.name, msg: req.body.msg, favorite: "" }, (err, result) => {
+  app.post('/journal', (req, res) => { //post for my journal; note: favorited entries set to true for now but I will modify this (my plan is to replace the star with a different css component- but in theory, it will still enable the user to favorite their preferred entry)
+    db.collection('entries').insertOne({ userID: req.user._id, entry: req.body.entry, favorite: false, timestamp: new Date()}, (err, result) => {
       if (err) return console.log(err)
       console.log('saved to database')
-      res.redirect('/profile')
+      res.redirect('/journal')
     })
   })
 
-  app.put('/messages', (req, res) => { //put for profile page ('my journal' section)
-    db.collection('messages')
-      .findOneAndUpdate({ name: req.body.name, msg: req.body.msg }, {
+// PUT'S ===============================================================
+
+  app.put('/journal', (req, res) => { //put for my journal; *note to self: left of colon has to match mongodb!
+    console.log(req.body)
+    db.collection('entries')
+      .findOneAndUpdate({ _id: ObjectId(req.body.entryID) }, {
         $set: {
-          favorite: "saved"
+          favorite: true
         }
-      }, {
-        sort: { _id: -1 },
-        upsert: true
       }, (err, result) => {
         if (err) return res.send(err)
         res.send(result)
       })
   })
 
-  app.delete('/messages', (req, res) => {
-    db.collection('messages').findOneAndDelete({ name: req.body.name, msg: req.body.msg }, (err, result) => {
+// DELETE'S ===============================================================
+
+  app.delete('/journal', (req, res) => {
+    console.log(req.user._id)
+    db.collection('entries').findOneAndDelete({ _id: ObjectId(req.body.entryID) }, (err, result) => {
       if (err) return res.send(500, err)
-      res.send('Message deleted!')
+      res.send('Journal entry deleted!')
     })
   })
 

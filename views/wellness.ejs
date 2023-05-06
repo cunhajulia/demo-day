@@ -1,1 +1,52 @@
-<!-- this page will contain an array of affirmations, allowing the survivor to favorite their preferred ones. -->
+<!-- this page will contain an array of affirmations (that will randomize in the next draft), allowing the survivor to add/favorite their preferred ones. -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Julia's Demo Day Draft 1: my wellness</title>
+</head>
+
+<body>
+  <!DOCTYPE html>
+  <html>
+
+  <head>
+    <title>Affirmations</title>
+  </head>
+
+  <body>
+    <h1>Affirmations</h1>
+    <p>Below are some affirmations to help you start your day:</p>
+
+    <ul class="appAffirmations">
+      <li>I am worthy and deserving of love and happiness.</li>
+      <li>I trust in my ability to handle any challenge that comes my way.</li>
+      <li>I am surrounded by positivity and abundance.</li>
+      <li>I release all negative thoughts and embrace positive thinking.</li>
+      <li>I am confident and capable of achieving my goals.</li>
+      <li>I am grateful for all the blessings in my life.</li>
+      <li>I forgive myself and others, and let go of all grudges.</li>
+      <li>I am proud of my accomplishments and excited for my future.</li>
+      <li>I am healthy, strong, and full of vitality.</li>
+      <li>I am at peace and in harmony with the universe.</li>
+      <li>It is not my fault.</li>
+    </ul>
+
+    <form action="/wellness" method="POST">
+      <h2>Write your own affirmation:</h2>
+      <textarea name="affirmation" rows="5" cols="50"></textarea>
+      <br>
+      <button type="submit">Save</button>
+    </form>
+  </body>
+
+  </html>
+
+
+  <script src="main.js"></script>
+</body>
+
+</html>

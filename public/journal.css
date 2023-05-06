@@ -1,0 +1,88 @@
+
+body{
+  font-family: 'Poppins';
+  background-color: rgb(125	184	212);
+  color: white;
+}
+h1, h2{
+  font-family: 'Poppins';
+}
+/* Style the journal header */
+.journal {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.journal h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+/* Style the exit button */
+.btn-default {
+  margin-top: 10px;
+}
+
+/* Style the journal entries */
+.entries {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.entries li {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  position: relative;
+}
+
+.entries li span {
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Style the favorite and trash icons */
+
+.fa-trash {
+  cursor: pointer;
+  font-size: 20px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  margin-left: 50px!important;
+}
+
+.fa-star:hover,
+.fa-trash:hover {
+  color: #333;
+}
+
+/* Style the add entry form */
+form {
+  margin-top: 20px;
+}
+
+form input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  margin-bottom: 10px;
+}
+
+form button[type="submit"] {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+form button[type="submit"]:hover {
+  background-color: #555;
+}
