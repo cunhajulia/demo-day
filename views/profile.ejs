@@ -1,58 +1,37 @@
-<!-- this is my homepage: left nav sidebar, and the built in universal action plan (per Figma wireframe) -->
+<!-- renamed what was plan to profile -->
+<%- include('partials/headers') -%>
 
-<!doctype html>
-<html>
+  <span class="safeExit"><a href="https://www.google.com/">safely exit site</a></span>
+  <h2>Action Plan</h2>
+  <ul>
+    <% for(var i=0; i<steps.length; i++) {%>
+      <li class="myEntry">
+        <span style="color: <%=steps[i].color%>">
+          <%= steps[i].title %>
+        </span>
+        <span>
+          <%= steps[i].description %>
+        </span>
+        <span>
+          <%= steps[i].notes %>
+        </span>
+        <% const userStep=userSteps.find(s=> steps[i]._id.toString()===s.stepID.toString())
+          %>
+          <form action="/userSteps/<%=steps[i]._id%>" method="POST">
+            <label>Upload an image here:</label>
+            <input type="file" name="image">
+            <textarea name="notes"><%=userStep?userStep.notes:""%></textarea>
+            <span>Did you complete this?</span>
+            <input type="checkbox" name="completed">
+            <button type="submit">Submit</button>
+          </form>
+      </li>
+      <% } %>
+  </ul>
 
-<head>
-  <title>Julia's Demo Day Draft 1: homepage</title>
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-  <link rel="stylesheet" href="font-awesome.min.css">
-  <link rel="stylesheet" href="profile.css">
-</head>
 
-<body>
-  <div id="sidebar">
-    <h3>welcome</h>
-    <ul>
-      <li><a href="/saeck">My SAECK Number</a></li>
-      <li><a href="/ep">My Emergency Plan</a></li>
-      <li><a href="/journal">My Journal</a></li>
-      <li><a href="/wellness">My Wellness</a></li>
-    </ul>
-  </div>
 
-  <h1>Universal Action Plan</h1>
-<ul>
-    <li style="--accent-color:#41516C">
-        <div class="date">2002</div>
-        <div class="title">Title 1</div>
-        <div class="descr">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas itaque hic quibusdam fugiat est numquam harum, accusamus suscipit consequatur laboriosam!</div>
-    </li>
-    <li style="--accent-color:#FBCA3E">
-        <div class="date">2007</div>
-        <div class="title">Title 2</div>
-        <div class="descr">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos adipisci nobis nostrum vero nihil veniam.</div>
-    </li>
-    <li style="--accent-color:#E24A68">
-        <div class="date">2012</div>
-        <div class="title">Title 3</div>
-        <div class="descr">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga minima consequuntur soluta placeat iure totam commodi repellendus ea delectus, libero fugit quod reprehenderit, sequi quo, et dolorum saepe nulla hic.</div>
-    </li>
-    <li style="--accent-color:#1B5F8C">
-        <div class="date">2017</div>
-        <div class="title">Title 4</div>
-        <div class="descr">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit, cumque.</div>
-    </li>
-    <li style="--accent-color:#4CADAD">
-        <div class="date">2022</div>
-        <div class="title">Title 5</div>
-        <div class="descr">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit, non.</div>
-    </li>
-</ul>
-<div class="credits"><a target="_blank" href="https://www.freepik.com/free-vector/infographic-template-with-yearly-info_1252895.htm"></a></div>
+  <script src="main.js"></script>
+  </body>
 
-    <script src="main.js"></script>
-</body>
-
-</html>
+  </html>

@@ -51,7 +51,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 // launch ======================================================================
 app.listen(port);
-console.log('My demo day project is showing on ' + port);
+console.log('Demo day is showing on ' + port);
 
 app.put('/messages/thumbDown', (req, res) => { //*note to self: modify/delete below draft round 
   db.collection('messages')
