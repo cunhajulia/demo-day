@@ -8,7 +8,7 @@ module.exports = function (app, passport, db) {
     res.render('index.ejs');
   });
 
-  // GET'S =========================
+  // GET'S ========================= //*need to update the body of all of these gets!!!*
 
   app.get('/psa', isLoggedIn, function (req, res) {
     db.collection('entries').find({ userID: req.user._id }).toArray((err, result) => {
@@ -41,20 +41,17 @@ module.exports = function (app, passport, db) {
   });
 
   app.get('/profile', isLoggedIn, function (req, res) { 
-    db.collection('steps').find().toArray((err, result) => {
-      db.collection('userSteps').find({userID:req.user._id}).toArray((err, userSteps) => {
-
+      db.collection('details').find({userID:req.user._id}).toArray((err, details) => {
         if (err) return console.log(err)
         res.render('profile.ejs', {
           user: req.user,
-          steps: result,
-          userSteps: userSteps
+          details: details
         })
       })
     })
-  });
 
   // LOGOUT ==============================
+
   app.get('/logout', function (req, res) {
     req.logout(() => {
       console.log('You have safely logged out!')
@@ -64,7 +61,7 @@ module.exports = function (app, passport, db) {
 
   // POST'S ===============================================================
 
-  app.post('/psa', (req, res) => { 
+  app.post('/psa', (req, res) => { //??? previously was journal page, working still - can I update anything? or should i delete?
     db.collection('entries').insertOne({ userID: req.user._id, entry: req.body.entry, favorite: false, timestamp: new Date() }, (err, result) => {
       if (err) return console.log(err)
       console.log('saved to database')
@@ -72,17 +69,38 @@ module.exports = function (app, passport, db) {
     })
   })
 
-  app.post('/userSteps/:stepID', (req, res) => {
-    db.collection('userSteps').insertOne({ stepID: ObjectId(req.params.stepID), userID: req.user._id, notes: req.body.notes, completed: req.body.completed, timestamp: new Date()}, (err, result) => {
+  app.post('/details', /*upload.single('image'),*/ (req, res) => { //profile part to upload docs, pics - GOT MULTER
+    db.collection('details').insertOne({ userID: req.user._id, notes: req.body.notes, timestamp: new Date()}, (err, result) => {
       if (err) return console.log(err)
       console.log('saved to database')
       res.redirect('/profile')
     })
   })
 
+  app.post('/profile', (req, res) => { //create notes and have them show up both in the db and on the user profile
+    db.collection('entries').insertOne({ userID: req.user._id, entry: req.body.entry, favorite: false, timestamp: new Date() }, (err, result) => {
+      if (err) return console.log(err)
+      console.log('saved to database')
+      res.redirect('/psa')
+    })
+  })
+
   // PUT'S ===============================================================
 
-  app.put('/psa', (req, res) => { 
+  app.put('/status', (req, res) => { //needs to be coded - update here is that you can timestamp the different days you checked on your kit status
+    console.log(req.body)
+    db.collection('entries')
+      .findOneAndUpdate({ _id: ObjectId(req.body.entryID) }, {
+        $set: {
+          favorite: true
+        }
+      }, (err, result) => {
+        if (err) return res.send(err)
+        res.send(result)
+      })
+  })
+
+  app.put('/profile', (req, res) => { //needs to be modified - for the notes portion: you can edit any previously created notes 
     console.log(req.body)
     db.collection('entries')
       .findOneAndUpdate({ _id: ObjectId(req.body.entryID) }, {
@@ -97,7 +115,7 @@ module.exports = function (app, passport, db) {
 
   // DELETE'S ===============================================================
 
-  app.delete('/psa', (req, res) => {
+  app.delete('/profile', (req, res) => { //to delete user created docs and notes and images
     console.log(req.user._id)
     db.collection('entries').findOneAndDelete({ _id: ObjectId(req.body.entryID) }, (err, result) => {
       if (err) return res.send(500, err)
@@ -106,13 +124,6 @@ module.exports = function (app, passport, db) {
   })
 
 
-
-
-
-
-
-
-  
 
   // =============================================================================
   // AUTHENTICATE (FIRST LOGIN) ==================================================

@@ -2,35 +2,115 @@
 <%- include('partials/headers') -%>
 
   <span class="safeExit"><a href="https://www.google.com/">safely exit site</a></span>
-  <h2>Action Plan</h2>
+
+  <!-- note: below, do i want it to say users name or just welcome? -->
+  <h2>welcome, username</h2> 
+  <div class="user-icon-placeholder"></div>
+  <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+  
+  <h2 class="contacts-header">main tab</h2>
+
+  <div class="tab">
+    <button class="tablinks" onclick="openTab(event, 'docs')">Docs</button>
+    <button class="tablinks" onclick="openTab(event, 'notes')">Notes</button>
+    <button class="tablinks" onclick="openTab(event, 'contact')">Contact Info</button>
+  </div>
+
+  <div id="docs" class="tabcontent">
+    <h3>Document Upload</h3>
+    <p class="docs-header-info">add any important documents as complementary resource to your kit, such as affidavits, tox reports, testimonies, Victim Compensation Form #6, etc.</p>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <label>Select file to upload:</label>
+      <input type="file" name="fileToUpload" id="fileToUpload">
+      <input type="submit" value="Upload" name="submit">
+    </form>
+  </div>
+
+  <div id="notes" class="tabcontent">
+    <h3>Notes</h3>
+    <form action="/notes" method="post">
+      <label for="notes">Enter any notes to attach to your evidence collection:</label>
+      <textarea id="notes" name="notes" rows="4" cols="50"></textarea>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+
+  <div id="contact" class="tabcontent">
+    <h3>Important Contacts</h3>
+    <form action="/contact" method="post">
+      <label for="police">Police Detective:</label>
+      <input type="text" id="police" name="police">
+      <label for="hospital">Hospital:</label>
+      <input type="text" id="hospital" name="hospital">
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+
+
+
+	<!-- <table>
+		<tr>
+			<th>Contact</th>
+			<th>Name</th>
+			<th>Address</th>
+			<th>Phone Number</th>
+      <th>Save</th>
+		</tr>
+		<tr>
+			<td>Hospital</td>
+			<td><input type="text" name="hospital-name"></td>
+			<td><input type="text" name="hospital-address"></td>
+			<td><input type="tel" name="hospital-phone"></td>
+      <td><button id="submit">Submit</button></td>
+		</tr>
+		<tr>
+			<td>Police Department</td>
+			<td><input type="text" name="police-dept"></td>
+			<td><input type="text" name="dept-address"></td>
+			<td><input type="tel" name="detective-phone"></td>
+      <td><button id="submit">Submit</button></td>
+		</tr>
+		<tr>
+			<td>Police Detective</td>
+			<td><input type="text" name="detective-name"></td>
+			<td></td>
+			<td><input type="tel" name="detective-phone"></td>
+      <td><button id="submit">Submit</button></td>
+		</tr>
+	</table> -->
+  <!-- <h2 class="docs-header">add documents</h2>
+  <p class="docs-header-info">add any important documents as complementary resource to your kit, such as affidavits, tox reports, testimonies, Victim Compensation Form #6, etc.</p> -->
+  <!-- <h2 class="notes-header">add notes</h2> -->
+
   <ul>
-    <% for(var i=0; i<steps.length; i++) {%>
-      <li class="myEntry">
-        <span style="color: <%=steps[i].color%>">
-          <%= steps[i].title %>
-        </span>
+    <% for(var i=0; i<details.length; i++) {%>
+      <li class="myNotes">
+       
+        <% 
+        if(details[i].image) {
+          var imgSrc = 'data:image/png;base64,' + details[i].image; %>
+          <img src="<%= imgSrc %>" alt="Base64-encoded image" />
+       <% } %>
+       
         <span>
-          <%= steps[i].description %>
+          <%= details[i].notes %>
         </span>
-        <span>
-          <%= steps[i].notes %>
-        </span>
-        <% const userStep=userSteps.find(s=> steps[i]._id.toString()===s.stepID.toString())
-          %>
-          <form action="/userSteps/<%=steps[i]._id%>" method="POST">
-            <label>Upload an image here:</label>
-            <input type="file" name="image">
-            <textarea name="notes"><%=userStep?userStep.notes:""%></textarea>
-            <span>Did you complete this?</span>
-            <input type="checkbox" name="completed">
-            <button type="submit">Submit</button>
-          </form>
+    <button data-detailsid="<%=details[i]._id %>">Delete</button>
       </li>
       <% } %>
   </ul>
 
+  <form action="/details" method="POST">
+    <label>Upload an image here:</label>
+    <input type="file" name="image">
+    <textarea name="notes"></textarea>
+    <button type="submit">Submit</button>
+  </form>
 
 
+
+  
+  <%- include('partials/footers') -%>
   <script src="main.js"></script>
   </body>
 

@@ -1,7 +1,7 @@
 // server.js
 
 // set up ======================================================================
-// get all the tools we need
+// getting all the necessary tools
 var express  = require('express');
 var app      = express();
 var port     = process.env.PORT || 5555;
@@ -9,6 +9,8 @@ const MongoClient = require('mongodb').MongoClient
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
+const cors = require('cors');
+const multer = require('multer');
 
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -47,23 +49,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
+// app.use(cors({origin: 'https://www.communitybenefitinsight.org'}));
 
 
 // launch ======================================================================
 app.listen(port);
 console.log('Demo day is showing on ' + port);
 
-app.put('/messages/thumbDown', (req, res) => { //*note to self: modify/delete below draft round 
-  db.collection('messages')
-  .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
-    $set: {
-      thumbUp:req.body.thumbUp - 1
-    }
-  }, {
-    sort: {_id: -1}, 
-    upsert: true  
-  }, (err, result) => {
-    if (err) return res.send(err)
-    res.send(result)
-  })
-})
