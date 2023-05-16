@@ -1,7 +1,17 @@
 //*note to self: left of colon has to match mongodb!
 
-module.exports = function (app, passport, db) {
+module.exports = function (app, passport, db, multer) {
   const ObjectId = require('mongodb').ObjectID
+
+  var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, 'public/images/uploads')
+    },
+    filename: (req, file, cb) => {
+      cb(null, file.fieldname + '-' + Date.now() + ".png")
+    }
+});
+var upload = multer({storage: storage});
 
   // show the landing page (including buttons that direct to the login + signup)
   app.get('/', function (req, res) {
@@ -41,11 +51,11 @@ module.exports = function (app, passport, db) {
   });
 
   app.get('/profile', isLoggedIn, function (req, res) { 
-      db.collection('details').find({userID:req.user._id}).toArray((err, details) => {
+      db.collection('posts').find({posterId:req.user._id}).sort({date: 1}).toArray((err, posts) => {
         if (err) return console.log(err)
         res.render('profile.ejs', {
           user: req.user,
-          details: details
+          posts: posts
         })
       })
     })
@@ -61,13 +71,20 @@ module.exports = function (app, passport, db) {
 
   // POST'S ===============================================================
 
-  app.post('/psa', (req, res) => { //??? previously was journal page, working still - can I update anything? or should i delete?
-    db.collection('entries').insertOne({ userID: req.user._id, entry: req.body.entry, favorite: false, timestamp: new Date() }, (err, result) => {
+  app.post('/createPost', upload.single('file-to-upload'), (req, res, next) => {
+    let uId = ObjectId(req.session.passport.user)
+    db.collection('posts').save({posterId: uId,
+       description: req.body.description, 
+       notes: req.body.notes, 
+       category: req.body.category,
+       date: req.body.date,
+       docImgPath: 'images/uploads/' + req.file.filename},
+        (err, result) => {
       if (err) return console.log(err)
       console.log('saved to database')
-      res.redirect('/psa')
+      res.redirect('/profile')
     })
-  })
+  });
 
   app.post('/details', /*upload.single('image'),*/ (req, res) => { //profile part to upload docs, pics - GOT MULTER
     db.collection('details').insertOne({ userID: req.user._id, notes: req.body.notes, timestamp: new Date()}, (err, result) => {
