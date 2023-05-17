@@ -74,6 +74,9 @@
             <p>Category:<%= posts[i].category %>
             </p>
             <a href="/<%= posts[i].docImgPath %>"><span>View Document</span></a>
+            <!-- edit and delete buttons -->
+            <button class="btn btn-primary fa fa-pen-to-square" type="submit" data-entryid="<%= posts[i]._id %>"> Edit</button>
+            <button class="btn btn-primary fa fa-trash" type="submit" data-entryid="<%= posts[i]._id %>"> Delete</button>
           </div>
         </li>
         <% } %>

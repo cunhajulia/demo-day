@@ -1,5 +1,7 @@
 //*note to self: left of colon has to match mongodb!
 
+
+
 module.exports = function (app, passport, db, multer) {
   const ObjectId = require('mongodb').ObjectID
 
@@ -53,12 +55,30 @@ var upload = multer({storage: storage});
   app.get('/profile', isLoggedIn, function (req, res) { 
       db.collection('posts').find({posterId:req.user._id}).sort({date: 1}).toArray((err, posts) => {
         if (err) return console.log(err)
+        console.log(posts)
         res.render('profile.ejs', {
           user: req.user,
           posts: posts
         })
       })
     })
+
+    app.get('/editPost/:id', async (req, res) => { //id path is right but it shows wrong info!! NEED TO WORK ON 
+      const postId = req.params.id;
+      console.log(`edit post: ${postId}`)
+      const post =  await db.collection('posts').findOne({posterId: req.user._id})
+      console.log(`findOne=${post}`)
+      if(post === null){
+        console.log(`edit post: could not find post ${req.user._id}`)
+        return 
+      }
+      res.render('editPost.ejs', { post })
+      // db.collection('posts').findOne({posterId: req.user._id})
+      // .toArray((err, post) => {
+      //   if (err) return console.log(err)
+      //   res.render('editPost.ejs', { post })
+      // })
+    });
 
   // LOGOUT ==============================
 
@@ -71,7 +91,7 @@ var upload = multer({storage: storage});
 
   // POST'S ===============================================================
 
-  app.post('/createPost', upload.single('file-to-upload'), (req, res, next) => {
+app.post('/createPost', upload.single('file-to-upload'), (req, res, next) => {
     let uId = ObjectId(req.session.passport.user)
     db.collection('posts').save({posterId: uId,
        description: req.body.description, 
@@ -84,7 +104,7 @@ var upload = multer({storage: storage});
       console.log('saved to database')
       res.redirect('/profile')
     })
-  });
+  });  
 
   app.post('/details', /*upload.single('image'),*/ (req, res) => { //profile part to upload docs, pics - GOT MULTER
     db.collection('details').insertOne({ userID: req.user._id, notes: req.body.notes, timestamp: new Date()}, (err, result) => {
@@ -132,15 +152,13 @@ var upload = multer({storage: storage});
 
   // DELETE'S ===============================================================
 
-  app.delete('/profile', (req, res) => { //to delete user created docs and notes and images
+  app.delete('/deletePost/:id', (req, res) => { //to delete user uploads in profile (in the timeline)
     console.log(req.user._id)
-    db.collection('entries').findOneAndDelete({ _id: ObjectId(req.body.entryID) }, (err, result) => {
+    db.collection('posts').findOneAndDelete({ _id: ObjectId(req.params.id) }, (err, result) => {
       if (err) return res.send(500, err)
-      res.send('entry deleted!')
+      res.send('upload deleted!')
     })
   })
-
-
 
   // =============================================================================
   // AUTHENTICATE (FIRST LOGIN) ==================================================

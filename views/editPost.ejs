@@ -1,0 +1,28 @@
+<h1>hello im working</h1>
+
+<form action="/updatePost" enctype="multipart/form-data" method="POST">
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <input type="text" class="form-control" id="description" name="description" value="<%= post.description %>">
+  </div>
+  <div class="mb-3">
+    <label for="notes" class="form-label">Notes</label>
+    <textarea class="form-control" id="notes" name="notes"><%= post.notes %></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="category" class="form-label">Category</label>
+    <select name="category">
+      <option value="medical">Medical Records</option>
+      <option value="legal">Form 6</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="date" class="form-label">Date</label>
+    <input type="date" class="form-control" id="date" name="date">
+  </div>
+  <div class="mb-3">
+    <label for="imgUpload" class="form-label">Image</label>
+    <input type="file" class="form-control" id="imageUpload" name="file-to-upload">
+  </div>
+  <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+</form>

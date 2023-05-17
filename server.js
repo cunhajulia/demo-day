@@ -22,7 +22,7 @@ var configDB = require('./config/database.js');
 var db
 
 // configuration ===============================================================
-mongoose.connect(configDB.url, (err, database) => {
+mongoose.connect(configDB.url, (err, database) => { //mongoose lets us use mongodb 
   if (err) return console.log(err)
   db = database
   require('./app/routes.js')(app, passport, db, multer);
