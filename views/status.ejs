@@ -1,4 +1,4 @@
-<!-- note: status was reminders page -->
+
 <%- include('partials/headers') -%>
 
   <body>
@@ -16,12 +16,20 @@
       <input type="text" id="kitNumber" name="kitNumber">
       <button id="clickMe" type="button" name="button">Submit</button>
 
-      <label for="statusUpdate">Status:</label>
-      <p id="statusUpdate"></p>
-
-      <label for="verifiedOn">Last Verified on:</label>
-      <p id="statusHistoryTracker"></p>
-
+      <label for="firstDate">First date checked:</label>
+      <% if(status.length > 0){ %>
+        <p class="firstDate"><%= status[0].date %></p>
+      <% } else {  %>
+       <p class="firstDate"></p> 
+      <% } %>
+      <% for(var i=0; i<status.length; i++) {%>
+        <p>Kit Number:<%= status[i].kitNumber %>
+        </p>
+        <p>Status:<%= status[i].status %>
+        </p>
+        <p>Last Verified On:<%= status[i].date %>
+        </p>
+      <% } %>
       <!-- <input type="text" id="verifiedOn" name="verifiedOn" value="">  -->
     </div>
 

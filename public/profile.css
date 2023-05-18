@@ -1,4 +1,4 @@
-/* style for all main pages */
+/* style for all main app pages */
 
 body {
   font-family: 'Poppins';
@@ -17,12 +17,14 @@ h2 {
 
 }
 .homepage {
-  background-image: linear-gradient(to bottom, #9bb7d4, #b3a9d6, #d3a5cd, #d6bcc0);
+  /* background-image: linear-gradient(to bottom, #9bb7d4, #b3a9d6, #d3a5cd, #d6bcc0);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  height: 100%;
+  height: 100%; */
+  background: linear-gradient(135deg, #FFFBD3, #B9DFFC, #E6D9F2);
 }
+
 
 .contacts-header, .notes-header, .docs-header {
   margin: 5px;
@@ -496,7 +498,7 @@ body {
 
 /* FOOTER STYLES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.page-footer {
+/* .page-footer {
   position: fixed;
   right: 0;
   bottom: 0;
@@ -511,33 +513,7 @@ body {
 .page-footer a {
   display: flex;
   margin-left: 4px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+} */
 
 
 /* profile tabs */
@@ -575,4 +551,33 @@ body {
 
 .tabcontent.active {
   display: block;
+}
+
+/* psa */
+.psa {
+  position: relative;
+}
+.psa::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(249, 189, 231, 0.8) 5%, transparent 40%);
+  pointer-events: none;
+  z-index: -1;
+  animation: blobAnimate 20s infinite ease-in-out;
+}
+
+@keyframes blobAnimate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

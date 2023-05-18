@@ -33,11 +33,11 @@ var upload = multer({storage: storage});
   });
 
   app.get('/status', isLoggedIn, function (req, res) { 
-    db.collection('messages').find().toArray((err, result) => {
+    db.collection('status').find({posterId: req.user._id}).sort({date: 1}).toArray((err, result) => {
       if (err) return console.log(err)
       res.render('status.ejs', {
         user: req.user,
-        messages: result
+        status: result
       })
     })
   });
@@ -55,7 +55,6 @@ var upload = multer({storage: storage});
   app.get('/profile', isLoggedIn, function (req, res) { 
       db.collection('posts').find({posterId:req.user._id}).sort({date: 1}).toArray((err, posts) => {
         if (err) return console.log(err)
-        console.log(posts)
         res.render('profile.ejs', {
           user: req.user,
           posts: posts
@@ -66,12 +65,12 @@ var upload = multer({storage: storage});
     app.get('/editPost/:id', async (req, res) => { //id path is right but it shows wrong info!! NEED TO WORK ON 
       const postId = req.params.id;
       console.log(`edit post: ${postId}`)
-      const post =  await db.collection('posts').findOne({posterId: req.user._id})
+      const post =  await db.collection('posts').findOne({_id: ObjectId(postId)})
       console.log(`findOne=${post}`)
-      if(post === null){
-        console.log(`edit post: could not find post ${req.user._id}`)
-        return 
-      }
+      // if(post === null){
+      //   console.log(`edit post: could not find post ${req.user._id}`)
+      //   return 
+      // }
       res.render('editPost.ejs', { post })
       // db.collection('posts').findOne({posterId: req.user._id})
       // .toArray((err, post) => {
@@ -106,6 +105,27 @@ app.post('/createPost', upload.single('file-to-upload'), (req, res, next) => {
     })
   });  
 
+  app.post('/storeStatus', (req, res, next) => {
+    let uId = ObjectId(req.session.passport.user)
+    db.collection('status').save({posterId: uId,
+      status: req.body.status,
+      date: req.body.date,
+      kitNumber: req.body.kitNumber
+       },
+        (err, result) => {
+      if (err) return console.log(err)
+      console.log('saved to database')
+      res.redirect('/status')
+    })
+  });  
+
+
+
+
+
+
+
+
   app.post('/details', /*upload.single('image'),*/ (req, res) => { //profile part to upload docs, pics - GOT MULTER
     db.collection('details').insertOne({ userID: req.user._id, notes: req.body.notes, timestamp: new Date()}, (err, result) => {
       if (err) return console.log(err)
@@ -137,16 +157,19 @@ app.post('/createPost', upload.single('file-to-upload'), (req, res, next) => {
       })
   })
 
-  app.put('/profile', (req, res) => { //needs to be modified - for the notes portion: you can edit any previously created notes 
+  app.put('/updatePost/:id', (req, res) => { 
     console.log(req.body)
-    db.collection('entries')
-      .findOneAndUpdate({ _id: ObjectId(req.body.entryID) }, {
+    db.collection('posts')
+      .findOneAndUpdate({ _id: ObjectId(req.params.id) }, {
         $set: {
-          favorite: true
+         description: req.body.description,
+         notes: req.body.notes,
+         category: req.body.category,
+         date: req.body.date
         }
       }, (err, result) => {
         if (err) return res.send(err)
-        res.send(result)
+        res.redirect('/profile')
       })
   })
 

@@ -1,6 +1,3 @@
-// assume the status update is retrieved and stored in a variable called "update"
-// document.getElementById("status-update").textContent = update;
-
 // Get references to the HTML elements
 const kitNumberInput = document.getElementById('kitNumber');
 const statusUpdate = document.getElementById('statusUpdate');
@@ -108,7 +105,7 @@ function openTab(evt, tabName) {
 //   .then(res => res.json())
 //   .then(data => {
 //     console.log(data.contents)
-  
+
 //   })
 //   .catch(err => {
 //     console.log(`error ${err}`)
@@ -122,8 +119,8 @@ function openTab(evt, tabName) {
 const editButtons = document.querySelectorAll('.fa-pen-to-square');
 const deleteButtons = document.querySelectorAll('.fa-trash');
 
-editButtons.forEach(function(button) {
-  button.addEventListener('click', function() {
+editButtons.forEach(function (button) {
+  button.addEventListener('click', function () {
     const entryId = this.dataset.entryid;
     // Redirect to the edit page or perform any other action you need
     window.location.href = `/editPost/${entryId}`;
@@ -131,23 +128,23 @@ editButtons.forEach(function(button) {
 });
 
 
-deleteButtons.forEach(function(button) {
-  button.addEventListener('click', function() {
+deleteButtons.forEach(function (button) {
+  button.addEventListener('click', function () {
     const entryId = this.dataset.entryid;
 
     fetch(`/deletePost/${entryId}`, {
       method: 'DELETE',
     })
-    .then(function(response) {
-      if (response.ok) {
-        window.location.reload();
-      } else {
-        console.error('Error deleting post.');
-      }
-    })
-    .catch(function(error) {
-      console.error('Error deleting post:', error);
-    });
+      .then(function (response) {
+        if (response.ok) {
+          window.location.reload();
+        } else {
+          console.error('Error deleting post.');
+        }
+      })
+      .catch(function (error) {
+        console.error('Error deleting post:', error);
+      });
   });
 });
 
@@ -200,52 +197,67 @@ const barcodes = [
 // Add an event listener to the submit button
 submitButton.addEventListener('click', () => {
   const kitNumber = kitNumberInput.value.trim(); // Get the input value and trim any whitespace
-  
+
   // Find the barcode object with the matching kitNumber
-  const barcodeObj = barcodes.find((obj) => obj.barcode === kitNumber);
 
-  if (barcodeObj) {
-    // Update the status and history elements with the retrieved data
-    statusUpdate.textContent = barcodeObj.status;
 
-    const currentDate = new Date().toLocaleDateString();
-    // statusHistoryTracker.textContent = currentDate;
-    barcodeObj.history.push(currentDate);
-    renderVerificationHistory(barcodeObj.history);
 
-    kitNumberInput.value = '';
+  // Update the status and history elements with the retrieved data
 
-    // Update the last verified date if available
-    // statusHistoryTracker.textContent = barcodeObj.lastVerified || 'N/A';
-  } else {
-    // Clear the status and history elements if no matching barcode is found
-    statusUpdate.textContent = 'Barcode not found';
-    statusHistoryTracker.textContent = '';
+
+  // Statuses of kits
+  let statusArr = ['status unknown', 'en route to storage', 'in storage', 'not tested', 'tested',]
+  let firstDate = document.querySelector('.firstDate').innerText === '' ? new Date() : new Date(document.querySelector('.firstDate').innerText)
+  console.log(firstDate)
+  const currentDate = new Date()
+
+  let status
+
+  // Gets difference of days between first date submitted and current date
+  let diff = Math.abs(firstDate.getTime() - currentDate.getTime());
+  diff = diff / (1000 * 60 * 60 * 24);
+
+  console.log(diff)
+
+  // Checks difference of days and reassigns status
+  if (diff >= 40) {
+    status = statusArr[4]
+  } else if (diff >= 30) {
+    status = statusArr[3]
+  } else if (diff >= 20) {
+    status = statusArr[2]
+  } else if (diff >= 10) {
+    status = statusArr[1]
+  } else if (diff >= 0) {
+    status = statusArr[0]
   }
+
+  console.log(status)
+
+
+  fetch('storeStatus', {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      'status': status,
+      'date': currentDate.toLocaleDateString(),
+      'kitNumber': kitNumber
+    })
+  })
+    .then(data => {
+      console.log(data)
+      window.location.reload(true)
+    })
+
+  kitNumberInput.value = '';
+
 });
 
 
-// Function to render the verification history
-function renderVerificationHistory(history) {
-  statusHistoryTracker.textContent = history.join(', ');
-}
+
+
+// Check if there is stored verification history in localStorage
+
 
 // Event listener for the submit button
-submitButton.addEventListener('click', () => {
-  // Your existing code
-
-  if (barcodeObj) {
-    // Your existing code
-
-    const currentDate = new Date().toLocaleDateString();
-    barcodeObj.history.push(currentDate);
-    renderVerificationHistory(barcodeObj.history);
-
-    // Your existing code
-  } else {
-    // Your existing code
-  }
-});
-
-// Your existing code
 
