@@ -20,7 +20,7 @@ var upload = multer({storage: storage});
     res.render('index.ejs');
   });
 
-  // GET'S ========================= //*need to update the body of all of these gets!!!*
+  // GET'S ========================= 
 
   app.get('/psa', isLoggedIn, function (req, res) {
     db.collection('entries').find({ userID: req.user._id }).toArray((err, result) => {
@@ -78,6 +78,11 @@ var upload = multer({storage: storage});
       //   res.render('editPost.ejs', { post })
       // })
     });
+
+    app.get('/barcodes', function (req, res) {
+      res.render('barcodes.ejs');
+    });
+    
 
   // LOGOUT ==============================
 

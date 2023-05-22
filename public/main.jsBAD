@@ -152,48 +152,7 @@ deleteButtons.forEach(function (button) {
 // ____________________________________________________________________
 
 // Define the barcodes array
-const barcodes = [
-  { barcode: 'SAECK12345', status: 'in storage', history: [] },
-  { barcode: 'SAECK67890', status: 'tested', history: [] },
-  { barcode: 'SAECK24680', status: 'en route to storage', history: [] },
-  { barcode: 'SAECK13579', status: 'status unknown', history: [] },
-  { barcode: 'SAECK11223', status: 'tested', history: [] },
-  { barcode: 'SAECK33445', status: 'in storage', history: [] },
-  { barcode: 'SAECK55667', status: 'not tested', history: [] },
-  { barcode: 'SAECK77889', status: 'not tested', history: [] },
-  { barcode: 'SAECK89012', status: 'en route to storage', history: [] },
-  { barcode: 'SAECK12344', status: 'tested', history: [] },
-  { barcode: 'SAECK67895', status: 'in storage', history: [] },
-  { barcode: 'SAECK24685', status: 'status unknown', history: [] },
-  { barcode: 'SAECK13575', status: 'not tested', history: [] },
-  { barcode: 'SAECK11228', status: 'en route to storage', history: [] },
-  { barcode: 'SAECK33440', status: 'tested', history: [] },
-  { barcode: 'SAECK55662', status: 'in storage', history: [] },
-  { barcode: 'SAECK77883', status: 'not tested', history: [] },
-  { barcode: 'SAECK89016', status: 'tested', history: [] },
-  { barcode: 'SAECK12347', status: 'en route to storage', history: [] },
-  { barcode: 'SAECK67898', status: 'not tested', history: [] },
-  { barcode: "SAECK12345", status: "in storage", history: [] },
-  { barcode: "SAECK23456", status: "en route to storage", history: [] },
-  { barcode: "SAECK34567", status: "tested", history: [] },
-  { barcode: "SAECK45678", status: "status unknown", history: [] },
-  { barcode: "SAECK56789", status: "tested", history: [] },
-  { barcode: "SAECK67890", status: "in storage", history: [] },
-  { barcode: "SAECK78901", status: "tested", history: [] },
-  { barcode: "SAECK89012", status: "en route to storage", history: [] },
-  { barcode: "SAECK90123", status: "status unknown", history: [] },
-  { barcode: "SAECK01234", status: "tested", history: [] },
-  { barcode: "SAECK98765", status: "en route to storage", history: [] },
-  { barcode: "SAECK87654", status: "tested", history: [] },
-  { barcode: "SAECK76543", status: "in storage", history: [] },
-  { barcode: "SAECK65432", status: "not tested", history: [] },
-  { barcode: "SAECK54321", status: "not tested", history: [] },
-  { barcode: "SAECK43210", status: "en route to storage", history: [] },
-  { barcode: "SAECK24680", status: "status unknown", history: [] },
-  { barcode: "SAECK13579", status: "not tested", history: [] },
-  { barcode: "SAECK55555", status: "tested", history: [] },
-  { barcode: "SAECK44444", status: "in storage", history: [] }
-];
+
 
 // Add an event listener to the submit button
 submitButton.addEventListener('click', () => {
@@ -257,9 +216,4 @@ submitButton.addEventListener('click', () => {
 
 
 
-// const getBarcode = document.getElementById('needBarcode');
-// for (i = 0; i < barcodes.length; i++) {
-//  let option = document.createElement('option')
-//  option.innerText = barcodes[i].barcode
-//  getBarcode.appendChild(option)
-// }
+

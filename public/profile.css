@@ -1,4 +1,4 @@
-/* style for all main app pages */
+/* stylesheet for all main app pages */
 
 body {
   font-family: 'Poppins';
@@ -6,6 +6,64 @@ body {
   margin-bottom: 60px;
   text-align: center;
   height: 100%;
+}
+
+.homepage {
+  position: relative;
+}
+
+.animated-heading {
+  transition: color 0.3s ease-in-out; /* Specify the properties to animate */
+  
+}
+
+.animated-heading:hover {
+  color: rgba(89 199 237); /* Change the color on hover */
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animated-heading {
+  animation: fade-in 1s ease-in-out; 
+}
+
+
+.appInterfaceOne {
+  background-color: #E6F3FF;
+  padding: 20px;
+  box-shadow: 9px 9px rgba(173, 216, 230, 0.5);
+  margin: 0 auto;
+  max-width: 800px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.appInterfaceTwo {
+  background-color: #F8E6FF;
+  padding: 20px;
+  box-shadow: 9px 9px rgba(173, 216, 230, 0.5);
+  margin: 0 auto;
+  max-width: 800px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+ .logo {
+  position: relative;
+  /* margin-top: 20px; Adjust the vertical position of the logo */
+  margin-bottom: none;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 200px; /* Adjust the width of the logo */
+  height: auto; /* Preserve the aspect ratio of the logo */
+  z-index: 2; /* Ensure the logo is displayed on top of the gradient */
 }
 
 h1 {
@@ -17,14 +75,8 @@ h2 {
 
 }
 .homepage {
-  /* background-image: linear-gradient(to bottom, #9bb7d4, #b3a9d6, #d3a5cd, #d6bcc0);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  height: 100%; */
-  background: linear-gradient(135deg, #FFFBD3, #B9DFFC, #E6D9F2);
+  background-color: white;
 }
-
 
 .contacts-header, .notes-header, .docs-header {
   margin: 5px;
@@ -43,24 +95,15 @@ h2 {
   position: fixed;
   top: 10px;
   right: 10px;
-  background-color: rgba(255, 234, 167, 0.8);
-  color: white;
+  color: rgba(89 199 237);
+  border: 2px solid rgba(89 199 237);
+  background-color: white;
   font-size: 16px;
   padding: 10px;
   border-radius: 5px;
 }
 
-.user-icon-placeholder {
-  width: 100px;
-  height: 100px;
-  background-color: #dcdcdc;
-  border-radius: 50%;
-  margin: 0 auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-table {
+/* table {
   border-collapse: collapse;
   width: 100%;
   margin: 5px;
@@ -75,7 +118,7 @@ td {
 
 th {
   background-color: #f2f2f2;
-}
+} */
 footer {
   position: absolute;
   bottom: 0;
@@ -86,17 +129,6 @@ footer {
   text-align: center;
   padding: 20px;
 
-
-  /* position: relative;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 50px;
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  padding: 10px;
-  margin-top: auto; */
 }
 /* nav bar styling ---------------------------------------*/
 
@@ -109,10 +141,13 @@ nav {
   max-width: 960px;
   mask-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #ffffff 25%, #ffffff 75%, rgba(255, 255, 255, 0) 100%);
   margin: 0 auto;
-  padding: 60px 0;
+  margin-top: 10px;
+  padding: 10px 0;
+  align-items: center;
 }
 
 nav ul {
+  
   text-align: center;
   background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 25%, rgba(255, 255, 255, 0.2) 75%, rgba(255, 255, 255, 0) 100%);
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
@@ -120,6 +155,7 @@ nav ul {
 
 nav ul li {
   display: inline-block;
+  text-align: center;
 }
 
 nav ul li a {
@@ -137,6 +173,11 @@ nav ul li a:hover {
   color: rgba(0, 35, 122, 0.7);
 }
 
+/* nav img {
+  margin-right: 10px; /* Add some spacing to the right of the image */
+  /* width: 200px;
+  height: auto;
+} */
 /* -------------------------------------------------------------- */
 /* status page styling */
 .check-kit-status {
@@ -161,7 +202,6 @@ nav ul li a:hover {
 
 .check-kit-status input[type="submit"] {
   margin-top: 10px;
-  background-color: #4CAF50;
   color: white;
   padding: 12px 20px;
   border: none;
@@ -169,9 +209,9 @@ nav ul li a:hover {
   cursor: pointer;
 }
 
-.check-kit-status input[type="submit"]:hover {
+/* .check-kit-status input[type="submit"]:hover {
   background-color: #45a049;
-}
+} */
 
 .check-kit-status p {
   margin-top: 20px;
@@ -260,12 +300,15 @@ p {
   padding: 0;
   box-sizing: border-box;
 }
-
+ /* button for status page */
 button {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  outline: none;
+  margin-top: 4px;
+  color: white;
+  border: 2px solid rgba(89 199 237);
+  background-color: rgba(89 199 237);
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 a {
@@ -279,7 +322,8 @@ img {
 
 body {
   font: normal 16px/1.5 "Inter", sans-serif;
-  background: var(--columbia-blue);
+  /* below: BACKGROUND COLOR FOR ENTIRE APP!! */
+  background: var(--columbia-blue); 
   color: var(--black);
   margin-bottom: 50px;
 }
@@ -307,7 +351,7 @@ body {
   font-size: 1.3rem;
 }
 
-/* TIMELINE
+/* TIMELINE in profile page
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 .timeline {
@@ -516,7 +560,7 @@ body {
 } */
 
 
-/* profile tabs */
+/* profile tabs --------------------------------- */
 
 .tab {
   overflow: hidden;
@@ -553,7 +597,7 @@ body {
   display: block;
 }
 
-/* psa */
+/* psa page -------------------------- */
 .psa {
   position: relative;
 }
@@ -564,6 +608,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
+  background-color: white !important;
   background: radial-gradient(circle, rgba(249, 189, 231, 0.8) 5%, transparent 40%);
   pointer-events: none;
   z-index: -1;
@@ -581,3 +626,56 @@ body {
     transform: scale(1);
   }
 }
+
+/* profile page form -------------------------- */
+
+form {
+  max-width: 600px; /* Limit the width of the form */
+  margin: 0 auto; /* Center the form horizontally */
+  padding: 30px;
+  background-color: #f5f5f5; /* Set a background color for the form */
+  border-radius: 10px; /* Add some border radius for a rounded appearance */
+  margin-top: 20px;
+  box-shadow: 7px 7px rgb(213, 190, 226);
+}
+
+.form-label {
+  font-weight: bold; /* Make the labels bold */
+}
+
+.form-control {
+  width: 100%; /* Set the width of the input and textarea elements to 100% */
+  padding: 10px;
+  border: 1px solid #ccc; /* Add a border to the input and textarea elements */
+  border-radius: 5px; /* Add some border radius for a rounded appearance */
+  margin-bottom: 10px;
+}
+
+select.form-control {
+  /* Additional styles for the select element */
+  appearance: none;
+  background-image: url('path-to-arrow-icon'); /* Replace with your custom arrow icon */
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px;
+}
+
+.btn-primary {
+  /* Styles for the submit button */
+  color: white;
+  border: 2px solid rgba(89 199 237);
+  background-color: rgba(89 199 237);
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #0069d9; /* Change the background color on hover */
+}
+
+.btn-primary:active {
+  background-color: #0056b3; /* Change the background color when active */
+}
+/* ------------------------------------------------------- */
+/* status page styling */

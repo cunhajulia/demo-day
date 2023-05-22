@@ -3,7 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap");
 
 body {
-  margin: 0px;
+  margin: 50px;
   font-family: 'Poppins';
 
 }
@@ -94,9 +94,6 @@ body {
     font-size:24px;
   }
 }
-
-
-
 
 .jumbotron{
   margin-top: 50px;
