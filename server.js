@@ -6,6 +6,7 @@ var express  = require('express');
 var app      = express();
 var port     = process.env.PORT || 5555;
 const MongoClient = require('mongodb').MongoClient
+const ObjectId = require('mongodb').ObjectID
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
@@ -26,7 +27,7 @@ var db
 mongoose.connect(configDB.url, (err, database) => { //mongoose lets us use mongodb 
   if (err) return console.log(err)
   db = database
-  require('./app/routes.js')(app, passport, db, multer);
+  require('./app/routes.js')(app, passport, db, multer, ObjectId);
 }); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration

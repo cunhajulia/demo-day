@@ -50,32 +50,7 @@
 5. notes they can add about any docs uploaded or anything they want to record -->
 
 
-  <form action="/createPost" enctype="multipart/form-data" method="POST">
-    <div class="mb-3">
-      <label for="description" class="form-label">Description</label>
-      <input type="text" class="form-control" id="description" name="description">
-    </div>
-    <div class="mb-3">
-      <label for="notes" class="form-label">Notes</label>
-      <textarea class="form-control" id="notes" name="notes"></textarea>
-    </div>
-    <div class="mb-3">
-      <label for="category" class="form-label">Category</label>
-      <select name="category">
-        <option value="medical">Medical Records</option>
-        <option value="legal">Legal</option>
-      </select>
-    </div>
-    <div class="mb-3">
-      <label for="date" class="form-label">Date</label>
-      <input type="date" class="form-control" id="date" name="date">
-    </div>
-    <div class="mb-3">
-      <label for="imgUpload" class="form-label">Image/PDF</label>
-      <input type="file" class="form-control" id="imageUpload" name="file-to-upload">
-    </div>
-    <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-  </form>
+  
 
  
 
@@ -116,22 +91,39 @@
 
   </section>
 
+  <form action="/createPost" enctype="multipart/form-data" method="POST">
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <input type="text" class="form-control" id="description" name="description">
+    </div>
+    <div class="mb-3">
+      <label for="notes" class="form-label">Notes</label>
+      <textarea class="form-control" id="notes" name="notes"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <select name="category">
+        <option value="medical">Medical Records</option>
+        <option value="legal">Legal</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="date" class="form-label">Date</label>
+      <input type="date" class="form-control" id="date" name="date">
+    </div>
+    <div class="mb-3">
+      <label for="imgUpload" class="form-label">Image/PDF</label>
+      <input type="file" class="form-control" id="imageUpload" name="file-to-upload">
+    </div>
+    <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+  </form>
+
   <!-- <footer class="page-footer">
     <span>made by </span>
     <a href="https://georgemartsoukos.com/" target="_blank">
       <img width="24" height="24" src="https://assets.codepen.io/162656/george-martsoukos-small-logo.svg" alt="George Martsoukos logo">
     </a>
   </footer> -->
-
-
-
-
-
-
-
-
-
-
 
   <!-----------------------------------------------------------------------------------------  -->
   <h2 class="contacts-header">gallery</h2>
@@ -164,9 +156,6 @@
 
   </div>
 
-  <%- include('partials/footers') -%>
     <script src="main.js"></script>
     <script src="timeline.js"></script>
-</body>
-
-</html>
+    <%- include('partials/footers') -%>

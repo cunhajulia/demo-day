@@ -2,8 +2,8 @@
 
 
 
-module.exports = function (app, passport, db, multer) {
-  const ObjectId = require('mongodb').ObjectID
+module.exports = function (app, passport, db, multer, ObjectId) {
+ 
 
   var storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -12,8 +12,8 @@ module.exports = function (app, passport, db, multer) {
     filename: (req, file, cb) => {
       cb(null, file.fieldname + '-' + Date.now() + ".png")
     }
-});
-var upload = multer({storage: storage});
+  });
+  var upload = multer({ storage: storage });
 
   // show the landing page (including buttons that direct to the login + signup)
   app.get('/', function (req, res) {
@@ -32,8 +32,8 @@ var upload = multer({storage: storage});
     })
   });
 
-  app.get('/status', isLoggedIn, function (req, res) { 
-    db.collection('status').find({posterId: req.user._id}).sort({date: 1}).toArray((err, result) => {
+  app.get('/status', isLoggedIn, function (req, res) {
+    db.collection('status').find({ posterId: req.user._id }).sort({ date: -1 }).toArray((err, result) => {
       if (err) return console.log(err)
       res.render('status.ejs', {
         user: req.user,
@@ -42,7 +42,7 @@ var upload = multer({storage: storage});
     })
   });
 
-  app.get('/homepage', isLoggedIn, function (req, res) { 
+  app.get('/homepage', isLoggedIn, function (req, res) {
     db.collection('messages').find().toArray((err, result) => {
       if (err) return console.log(err)
       res.render('homepage.ejs', {
@@ -52,37 +52,32 @@ var upload = multer({storage: storage});
     })
   });
 
-  app.get('/profile', isLoggedIn, function (req, res) { 
-      db.collection('posts').find({posterId:req.user._id}).sort({date: 1}).toArray((err, posts) => {
-        if (err) return console.log(err)
-        res.render('profile.ejs', {
-          user: req.user,
-          posts: posts
-        })
+  app.get('/profile', isLoggedIn, function (req, res) {
+    db.collection('posts').find({ posterId: req.user._id }).sort({ date: 1 }).toArray((err, posts) => {
+      if (err) return console.log(err)
+      res.render('profile.ejs', {
+        user: req.user,
+        posts: posts
       })
     })
+  })
 
-    app.get('/editPost/:id', async (req, res) => { //id path is right but it shows wrong info!! NEED TO WORK ON 
-      const postId = req.params.id;
-      console.log(`edit post: ${postId}`)
-      const post =  await db.collection('posts').findOne({_id: ObjectId(postId)})
-      console.log(`findOne=${post}`)
-      // if(post === null){
-      //   console.log(`edit post: could not find post ${req.user._id}`)
-      //   return 
-      // }
-      res.render('editPost.ejs', { post })
-      // db.collection('posts').findOne({posterId: req.user._id})
-      // .toArray((err, post) => {
-      //   if (err) return console.log(err)
-      //   res.render('editPost.ejs', { post })
-      // })
-    });
+  app.get('/editPost/:id', isLoggedIn, function (req, res) {
+    db.collection('posts').find({ _id: ObjectId(req.params.id) }).toArray((err, posts) => {
+      if (err) return console.log(err)
+      res.render('editPost.ejs', {
+        user: req.user,
+        post: posts[0]
+      })
+    })
+  })
 
-    app.get('/barcodes', function (req, res) {
-      res.render('barcodes.ejs');
-    });
-    
+
+
+  app.get('/barcodes', function (req, res) {
+    res.render('barcodes.ejs');
+  });
+
 
   // LOGOUT ==============================
 
@@ -95,34 +90,37 @@ var upload = multer({storage: storage});
 
   // POST'S ===============================================================
 
-app.post('/createPost', upload.single('file-to-upload'), (req, res, next) => {
+  app.post('/createPost', upload.single('file-to-upload'), (req, res, next) => {
     let uId = ObjectId(req.session.passport.user)
-    db.collection('posts').save({posterId: uId,
-       description: req.body.description, 
-       notes: req.body.notes, 
-       category: req.body.category,
-       date: req.body.date,
-       docImgPath: 'images/uploads/' + req.file.filename},
-        (err, result) => {
-      if (err) return console.log(err)
-      console.log('saved to database')
-      res.redirect('/profile')
-    })
-  });  
+    db.collection('posts').save({
+      posterId: uId,
+      description: req.body.description,
+      notes: req.body.notes,
+      category: req.body.category,
+      date: req.body.date,
+      docImgPath: 'images/uploads/' + req.file.filename
+    },
+      (err, result) => {
+        if (err) return console.log(err)
+        console.log('saved to database')
+        res.redirect('/profile')
+      })
+  });
 
   app.post('/storeStatus', (req, res, next) => {
     let uId = ObjectId(req.session.passport.user)
-    db.collection('status').save({posterId: uId,
+    db.collection('status').save({
+      posterId: uId,
       status: req.body.status,
       date: req.body.date,
       kitNumber: req.body.kitNumber
-       },
-        (err, result) => {
-      if (err) return console.log(err)
-      console.log('saved to database')
-      res.redirect('/status')
-    })
-  });  
+    },
+      (err, result) => {
+        if (err) return console.log(err)
+        console.log('saved to database')
+        res.redirect('/status')
+      })
+  });
 
 
 
@@ -131,8 +129,8 @@ app.post('/createPost', upload.single('file-to-upload'), (req, res, next) => {
 
 
 
-  app.post('/details', /*upload.single('image'),*/ (req, res) => { //profile part to upload docs, pics - GOT MULTER
-    db.collection('details').insertOne({ userID: req.user._id, notes: req.body.notes, timestamp: new Date()}, (err, result) => {
+  app.post('/details', /*upload.single('image'),*/(req, res) => { //profile part to upload docs, pics - GOT MULTER
+    db.collection('details').insertOne({ userID: req.user._id, notes: req.body.notes, timestamp: new Date() }, (err, result) => {
       if (err) return console.log(err)
       console.log('saved to database')
       res.redirect('/profile')
@@ -162,15 +160,16 @@ app.post('/createPost', upload.single('file-to-upload'), (req, res, next) => {
       })
   })
 
-  app.put('/updatePost/:id', (req, res) => { 
+  app.put('/updatePost', (req, res) => {
+    let id = req.body.postId
     console.log(req.body)
     db.collection('posts')
-      .findOneAndUpdate({ _id: ObjectId(req.params.id) }, {
+      .findOneAndUpdate({ _id: ObjectId(id) }, {
         $set: {
-         description: req.body.description,
-         notes: req.body.notes,
-         category: req.body.category,
-         date: req.body.date
+          description: req.body.description,
+          notes: req.body.notes,
+          category: req.body.category,
+          date: req.body.date
         }
       }, (err, result) => {
         if (err) return res.send(err)

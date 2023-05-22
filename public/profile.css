@@ -429,4 +429,11 @@ select.form-control {
   background-color: #0056b3; /* Change the background color when active */
 }
 /* ------------------------------------------------------- */
+/* edit page */
+#postId {
+  display: none;
+}
 /* status page styling */
+.statusCard {
+  border: 2px solid red;
+}
