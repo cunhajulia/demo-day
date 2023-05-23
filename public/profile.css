@@ -12,6 +12,10 @@ body {
   position: relative;
 }
 
+.headline {
+  color:rgba(109, 142, 182, 1);
+}
+
 .animated-heading {
   transition: color 0.3s ease-in-out; /* Specify the properties to animate */
   
@@ -39,6 +43,7 @@ body {
   background-color: #E6F3FF;
   padding: 20px;
   box-shadow: 9px 9px rgba(173, 216, 230, 0.5);
+  border-radius: 10px;
   margin: 0 auto;
   max-width: 800px;
   margin-top: 20px;
@@ -49,6 +54,7 @@ body {
   background-color: #F8E6FF;
   padding: 20px;
   box-shadow: 9px 9px rgba(173, 216, 230, 0.5);
+  border-radius: 10px;
   margin: 0 auto;
   max-width: 800px;
   margin-top: 30px;
@@ -79,13 +85,20 @@ h2 {
 }
 
 .contacts-header, .notes-header, .docs-header {
-  margin: 5px;
+  margin: 15px;
   padding: 0;
-  text-align: left;
+  text-align: center;
   font-size: 24px;
   font-weight: bold;
   color: #333;
 }
+
+/* .gallery-tag {
+  margin-top: 15px;
+  padding: 0;
+  text-align: left;
+} */
+
 .docs-header-info {
   margin: 5px;
   padding: 0;
@@ -348,10 +361,13 @@ p {
   display: block;
 }
 
-/* psa page -------------------------- */
+/* psa page styling cont. -------------------------- */
 .psa {
   position: relative;
 }
+
+
+
 .psa::after {
   content: "";
   position: absolute;
@@ -360,7 +376,7 @@ p {
   width: 100%;
   height: 100%;
   background-color: white !important;
-  background: radial-gradient(circle, rgba(249, 189, 231, 0.8) 5%, transparent 40%);
+  background: radial-gradient(circle, rgba(249, 189, 231, 0.8) 5%, transparent 40%), radial-gradient(circle, rgba(104, 120, 173, 0.746) 5%, transparent 40%);
   pointer-events: none;
   z-index: -1;
   animation: blobAnimate 20s infinite ease-in-out;
@@ -387,6 +403,7 @@ form {
   background-color: #f5f5f5; /* Set a background color for the form */
   border-radius: 10px; /* Add some border radius for a rounded appearance */
   margin-top: 20px;
+  margin-bottom: 20px;
   box-shadow: 7px 7px rgb(213, 190, 226);
 }
 
@@ -433,7 +450,32 @@ select.form-control {
 #postId {
   display: none;
 }
+/* -------------------------------------------------------------- */
 /* status page styling */
 .statusCard {
   border: 2px solid red;
 }
+
+.statusChecker::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white !important;
+  background: radial-gradient(circle at bottom left, rgba(125, 185, 213, 0.8), transparent 40%), radial-gradient(circle at bottom right, rgba(195, 215, 230, 0.8), transparent 40%);
+  background-size: 80% 80%; /* Adjust the sizes as needed */
+  background-position: bottom left, bottom right;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: -1;
+  animation: blobAnimate 20s infinite ease-in-out;
+}
+
+
+
+
+
+
+

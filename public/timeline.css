@@ -5,6 +5,14 @@ body {
   text-align: center;
   height: 100%;
 }
+ h2{ 
+  font-family: 'Poppins';
+ }
+ 
+ .profileHeadliner {
+  font-family: 'Poppins';
+  color:rgba(109, 142, 182, 1);
+ }
 
 .logo {
   position: relative;
@@ -20,9 +28,10 @@ body {
 
 .contacts-header, .notes-header, .docs-header {
   margin: 5px;
+  margin-top: 20px;
   padding: 0;
-  text-align: left;
-  font-size: 24px;
+  /* text-align: left; */
+  font-size: 30px;
   font-weight: bold;
   color: #333;
 }
@@ -51,7 +60,6 @@ footer {
   color: #fff;
   text-align: center;
   padding: 20px;
-
 }
 
 /* nav bar styling ---------------------------------------*/
@@ -197,8 +205,8 @@ select.form-control {
   --columbia-blue: #cee9e4;
   --midnight-green: #01565b;
   --yellow: #e5f33d;
-  --timeline-gradient: rgba(206, 233, 228, 1) 0%, rgba(206, 233, 228, 1) 50%,
-    rgba(206, 233, 228, 0) 100%;
+  /* --timeline-gradient: rgba(204, 184, 220, 1) 0%, rgba(204, 184, 220, 1) 10%,
+    rgba(206, 233, 228, 0) 100%; */
 }
 
 *,
@@ -207,6 +215,7 @@ select.form-control {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Poppins';
 }
 
 
@@ -221,9 +230,12 @@ select.form-control {
 
 .timeline {
   font: normal 16px/1.5 "Inter", sans-serif;
-  background: var(--columbia-blue); 
+  background: linear-gradient(to right, rgb(204, 184, 220), rgb(212, 232, 240));
   color: var(--black);
   margin-bottom: 50px;
+  border: 2px solid rgb(212, 232, 240);
+  border-radius: 8px;
+  box-shadow: 8px 8px rgba(125,185, 213, 0.6);
 }
 
 /* .section SECTION
@@ -289,7 +301,7 @@ select.form-control {
   justify-content: center;
   padding: 20px 40px;
   color: var(--white);
-  background: var(--midnight-green);
+  background: rgb(126, 185, 214);
   white-space: normal;
   border-radius: 10px;
 }
@@ -300,7 +312,7 @@ select.form-control {
 
 .timeline .info p {
   margin-top: 10px;
-  color: var(--crystal);
+  /* color: var(--crystal); */
 }
 
 .timeline .info a {
@@ -414,7 +426,7 @@ select.form-control {
   font-size: 1.4rem;
   font-weight: bold;
   margin-bottom: 8px;
-  color: var(--midnight-green);
+  color: rgb(124, 175, 206);
 }
 
 /* GENERAL MEDIA QUERIES
