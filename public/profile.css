@@ -51,9 +51,9 @@ body {
 }
 
 .appInterfaceTwo {
-  background-color: #F8E6FF;
+  background-color: rgba(190, 198, 226); 
   padding: 20px;
-  box-shadow: 9px 9px rgba(190, 198, 226);
+  box-shadow: 9px 9px #E6F3FF;
   border-radius: 10px;
   margin: 0 auto;
   max-width: 800px;
@@ -454,7 +454,12 @@ select.form-control {
 /* -------------------------------------------------------------- */
 /* status page styling */
 .statusCard {
-  border: 2px solid red;
+  background-color: #E6F3FF;
+  padding: 20px;
+  box-shadow: 5px 5px rgba(190, 198, 226);
+  border-radius: 5px;
+  margin: 0 auto;
+  margin-bottom: 8px;
 }
 
 .statusChecker::after {
@@ -465,8 +470,7 @@ select.form-control {
   width: 100%;
   height: 100%;
   background-color: white !important;
-  /* background: radial-gradient(circle at bottom left, rgba(125, 185, 213, 0.8), transparent 40%), radial-gradient(circle at bottom right, rgba(195, 215, 230, 0.8), transparent 40%); */
-  background-size: 80% 80%; /* Adjust the sizes as needed */
+  background-size: 80% 80%;
   background-position: bottom left, bottom right;
   background-repeat: no-repeat;
   pointer-events: none;
