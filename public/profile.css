@@ -42,7 +42,7 @@ body {
 .appInterfaceOne {
   background-color: #E6F3FF;
   padding: 20px;
-  box-shadow: 9px 9px rgba(173, 216, 230, 0.5);
+  box-shadow: 9px 9px rgba(190, 198, 226);
   border-radius: 10px;
   margin: 0 auto;
   max-width: 800px;
@@ -53,7 +53,7 @@ body {
 .appInterfaceTwo {
   background-color: #F8E6FF;
   padding: 20px;
-  box-shadow: 9px 9px rgba(173, 216, 230, 0.5);
+  box-shadow: 9px 9px rgba(190, 198, 226);
   border-radius: 10px;
   margin: 0 auto;
   max-width: 800px;
@@ -280,12 +280,13 @@ p {
   margin-top: 30px;
 }
 
-/* Add padding and border to answer divs */
+/* answer divs styling in psa page */
 .answer {
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f8f8f8;
+  box-shadow: 4px 4px rgb(190, 198, 226);
   margin-top: 20px;
 }
 
@@ -376,7 +377,7 @@ p {
   width: 100%;
   height: 100%;
   background-color: white !important;
-  background: radial-gradient(circle, rgba(249, 189, 231, 0.8) 5%, transparent 40%), radial-gradient(circle, rgba(104, 120, 173, 0.746) 5%, transparent 40%);
+  /* background: radial-gradient(circle, rgba(249, 189, 231, 0.8) 5%, transparent 40%), radial-gradient(circle, rgba(104, 120, 173, 0.746) 5%, transparent 40%); */
   pointer-events: none;
   z-index: -1;
   animation: blobAnimate 20s infinite ease-in-out;
@@ -464,7 +465,7 @@ select.form-control {
   width: 100%;
   height: 100%;
   background-color: white !important;
-  background: radial-gradient(circle at bottom left, rgba(125, 185, 213, 0.8), transparent 40%), radial-gradient(circle at bottom right, rgba(195, 215, 230, 0.8), transparent 40%);
+  /* background: radial-gradient(circle at bottom left, rgba(125, 185, 213, 0.8), transparent 40%), radial-gradient(circle at bottom right, rgba(195, 215, 230, 0.8), transparent 40%); */
   background-size: 80% 80%; /* Adjust the sizes as needed */
   background-position: bottom left, bottom right;
   background-repeat: no-repeat;

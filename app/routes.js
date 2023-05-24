@@ -10,7 +10,10 @@ module.exports = function (app, passport, db, multer, ObjectId) {
       cb(null, 'public/images/uploads')
     },
     filename: (req, file, cb) => {
-      cb(null, file.fieldname + '-' + Date.now() + ".png")
+      let extensionArray = file.originalname.split('.')
+      let extension = extensionArray[extensionArray.length-1]
+      console.log(extension)
+      cb(null, file.fieldname + '-' + Date.now() + `.${extension}`)
     }
   });
   var upload = multer({ storage: storage });
@@ -91,6 +94,7 @@ module.exports = function (app, passport, db, multer, ObjectId) {
   // POST'S ===============================================================
 
   app.post('/createPost', upload.single('file-to-upload'), (req, res, next) => {
+    console.log(req.file)
     let uId = ObjectId(req.session.passport.user)
     db.collection('posts').save({
       posterId: uId,
