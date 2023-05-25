@@ -1,7 +1,3 @@
-//*note to self: left of colon has to match mongodb!
-
-
-
 module.exports = function (app, passport, db, multer, ObjectId) {
  
 
@@ -126,13 +122,7 @@ module.exports = function (app, passport, db, multer, ObjectId) {
       })
   });
 
-
-
-
-
-
-
-
+// --------------------------------------------------------
   app.post('/details', /*upload.single('image'),*/(req, res) => { //profile part to upload docs, pics - GOT MULTER
     db.collection('details').insertOne({ userID: req.user._id, notes: req.body.notes, timestamp: new Date() }, (err, result) => {
       if (err) return console.log(err)
@@ -140,8 +130,9 @@ module.exports = function (app, passport, db, multer, ObjectId) {
       res.redirect('/profile')
     })
   })
+  // --------------------------------------------------------
 
-  app.post('/profile', (req, res) => { //create notes and have them show up both in the db and on the user profile
+  app.post('/profile', (req, res) => { 
     db.collection('entries').insertOne({ userID: req.user._id, entry: req.body.entry, favorite: false, timestamp: new Date() }, (err, result) => {
       if (err) return console.log(err)
       console.log('saved to database')
@@ -151,7 +142,7 @@ module.exports = function (app, passport, db, multer, ObjectId) {
 
   // PUT'S ===============================================================
 
-  app.put('/status', (req, res) => { //needs to be coded - update here is that you can timestamp the different days you checked on your kit status
+  app.put('/status', (req, res) => { 
     console.log(req.body)
     db.collection('entries')
       .findOneAndUpdate({ _id: ObjectId(req.body.entryID) }, {

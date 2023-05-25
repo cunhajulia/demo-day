@@ -4,56 +4,6 @@ const statusUpdate = document.getElementById('statusUpdate');
 const statusHistoryTracker = document.getElementById('statusHistoryTracker');
 const submitButton = document.getElementById('clickMe');
 
-
-
-
-
-// const barcodes = [
-//   { barcode: 'SAECK12345', status: 'in storage' },
-//   { barcode: 'SAECK67890', status: 'tested' },
-//   { barcode: 'SAECK24680', status: 'en route to storage' },
-//   { barcode: 'SAECK13579', status: 'status unknown' },
-//   { barcode: 'SAECK11223', status: 'tested' },
-//   { barcode: 'SAECK33445', status: 'in storage' },
-//   { barcode: 'SAECK55667', status: 'not tested' },
-//   { barcode: 'SAECK77889', status: 'not tested' },
-//   { barcode: 'SAECK89012', status: 'en route to storage' },
-//   { barcode: 'SAECK12344', status: 'tested' },
-//   { barcode: 'SAECK67895', status: 'in storage' },
-//   { barcode: 'SAECK24685', status: 'status unknown' },
-//   { barcode: 'SAECK13575', status: 'not tested' },
-//   { barcode: 'SAECK11228', status: 'en route to storage' },
-//   { barcode: 'SAECK33440', status: 'tested' },
-//   { barcode: 'SAECK55662', status: 'in storage' },
-//   { barcode: 'SAECK77883', status: 'not tested' },
-//   { barcode: 'SAECK89016', status: 'tested' },
-//   { barcode: 'SAECK12347', status: 'en route to storage' },
-//   { barcode: 'SAECK67898', status: 'not tested' },
-//   { barcode: "SAECK12345", status: "in storage" },
-//   { barcode: "SAECK23456", status: "en route to storage" },
-//   { barcode: "SAECK34567", status: "tested" },
-//   { barcode: "SAECK45678", status: "status unknown" },
-//   { barcode: "SAECK56789", status: "tested" },
-//   { barcode: "SAECK67890", status: "in storage" },
-//   { barcode: "SAECK78901", status: "tested" },
-//   { barcode: "SAECK89012", status: "en route to storage" },
-//   { barcode: "SAECK90123", status: "status unknown" },
-//   { barcode: "SAECK01234", status: "tested" },
-//   { barcode: "SAECK98765", status: "en route to storage" },
-//   { barcode: "SAECK87654", status: "tested" },
-//   { barcode: "SAECK76543", status: "in storage" },
-//   { barcode: "SAECK65432", status: "not tested" },
-//   { barcode: "SAECK54321", status: "not tested" },
-//   { barcode: "SAECK43210", status: "en route to storage" },
-//   { barcode: "SAECK24680", status: "status unknown" },
-//   { barcode: "SAECK13579", status: "not tested" },
-//   { barcode: "SAECK55555", status: "tested" },
-//   { barcode: "SAECK44444", status: "in storage" }
-// ];
-
-
-// ------------------------------------------------
-
 // profile tabs for contact info, docs and notes
 function openTab(evt, tabName) {
   var i, tabcontent, tablinks;
@@ -69,29 +19,7 @@ function openTab(evt, tabName) {
   evt.currentTarget.className += " active";
 }
 
-// hospital api _____________________________________________________
-
-// document.querySelector('button').addEventListener('click', getHospital)
-
-// function getHospital(){ //do i want to filter thru this api at all? or discard?
-//   let city = document.querySelector('.city').value
-//   let state = document.querySelector('.state').value
-//   const hospital = document.querySelector('.hospitals') 
-//   fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://www.communitybenefitinsight.org/api/get_hospitals.php?state=${state}&city=${city}&fields=hospital_name,address`)}`)
-//   .then(res => res.json())
-//   .then(data => {
-//     console.log(data.contents)
-
-//   })
-//   .catch(err => {
-//     console.log(`error ${err}`)
-//   });
-// }
-
-// _________________________________________________________
-
 //profile edit and delete functions
-
 const editButtons = document.querySelectorAll('.fa-pen-to-square');
 const deleteButtons = document.querySelectorAll('.fa-trash');
 
@@ -126,7 +54,7 @@ deleteButtons.forEach(function (button) {
 
 // ____________________________________________________________________
 
-// Define the barcodes array
+// barcodes array
 const barcodes = [
   { barcode: 'SAECK12345', status: 'in storage', history: [] },
   { barcode: 'SAECK67890', status: 'tested', history: [] },
@@ -173,13 +101,6 @@ const barcodes = [
 // Add an event listener to the submit button
 submitButton.addEventListener('click', () => {
   const kitNumber = kitNumberInput.value.trim(); // Get the input value and trim any whitespace
-
-  // Find the barcode object with the matching kitNumber
-
-
-
-  // Update the status and history elements with the retrieved data
-
 
   // Statuses of kits
   let statusArr = ['status unknown', 'en route to storage', 'in storage', 'not tested', 'tested',]
@@ -230,11 +151,3 @@ submitButton.addEventListener('click', () => {
 });
 
 
-
-
-// const getBarcode = document.getElementById('needBarcode');
-// for (i = 0; i < barcodes.length; i++) {
-//  let option = document.createElement('option')
-//  option.innerText = barcodes[i].barcode
-//  getBarcode.appendChild(option)
-// }
