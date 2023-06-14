@@ -1,5 +1,5 @@
 # demo-day
-My demo day project (video walkthrough of app coming soon):  
+My demo day project (video walkthrough of app coming soon):   
 
 [halffull.onrender.com/](https://halffull.onrender.com/)
 
